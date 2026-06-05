@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CA Pharmacy | Orders</title>
+  <meta name="description" content="Supplier orders frontend for CA Pharmacy.">
+  <link rel="icon" href="../assets/images/logo-mark.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="../assets/css/theme.css">
+  <link rel="stylesheet" href="../assets/css/app.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body data-page="orders">
+  <div class="app-scrim d-lg-none" id="appScrim"></div>
+  <div class="app-shell">
+    <aside class="app-sidebar" id="appSidebar"></aside>
+    <div class="app-main">
+      <header class="app-topbar" id="appTopbar"></header>
+      <main class="app-content container-fluid py-4 px-3 px-xl-4">
+        <section class="d-flex flex-column flex-xl-row align-items-xl-end justify-content-between gap-3 mb-4">
+          <div>
+            <span class="page-kicker">Procurement</span>
+            <h1 class="page-title mb-1">Orders</h1>
+            <p class="page-subtitle mb-0">Track supplier purchase orders and incoming stock commitments.</p>
+          </div>
+          <div class="d-flex flex-wrap gap-2">
+            <button class="btn btn-outline-secondary btn-sm px-3" type="button">Receive stock</button>
+            <button class="btn btn-success btn-sm px-3" type="button">Create order</button>
+          </div>
+        </section>
+
+        <section class="banner-alert mb-4">
+          <i data-lucide="alert-triangle"></i>
+          <div class="flex-grow-1">
+            <strong>4 items are at or below the reorder point.</strong>
+            <p class="mono">Ibuprofen · Lisinopril · Salbutamol · Amlodipine</p>
+          </div>
+          <button class="btn btn-success btn-sm px-3" type="button">Create reorder</button>
+        </section>
+
+        <section class="row g-4">
+          <div class="col-12 col-xl-8">
+            <article class="card border-0 shadow-sm list-card">
+              <div class="table-responsive px-4 py-2">
+                <table class="table align-middle data-table mb-0">
+                  <thead>
+                    <tr>
+                      <th scope="col">Order</th>
+                      <th scope="col">Supplier</th>
+                      <th scope="col" class="text-end">Items</th>
+                      <th scope="col" class="text-end">Units</th>
+                      <th scope="col">Expected</th>
+                      <th scope="col">Status</th>
+                      <th scope="col" class="text-end">Total</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr data-order-row data-id="PO-2061" data-supplier="MedSource Distribution" data-expected="07 Jun 2026" data-units="320" data-total="$4,180.50" data-state-tone="transit" data-state-label="In transit" data-lines="Amoxicillin 500 mg::24 packs|Salbutamol 100 mcg::16 packs|Omeprazole 20 mg::12 packs">
+                      <td class="mono fw-semibold">PO-2061</td><td>MedSource Distribution</td><td class="text-end mono">6</td><td class="text-end mono">320</td><td class="mono text-body-secondary">07 Jun 2026</td><td><span class="status-badge status-warning">In transit</span></td><td class="text-end mono">$4,180.50</td>
+                    </tr>
+                    <tr data-order-row data-id="PO-2060" data-supplier="Caldwell Wholesale" data-expected="06 Jun 2026" data-units="90" data-total="$1,245.00" data-state-tone="submitted" data-state-label="Submitted" data-lines="Ibuprofen 200 mg::20 packs|Amlodipine 5 mg::18 packs|Lisinopril 10 mg::12 packs">
+                      <td class="mono fw-semibold">PO-2060</td><td>Caldwell Wholesale</td><td class="text-end mono">3</td><td class="text-end mono">90</td><td class="mono text-body-secondary">06 Jun 2026</td><td><span class="status-badge status-info">Submitted</span></td><td class="text-end mono">$1,245.00</td>
+                    </tr>
+                    <tr data-order-row data-id="PO-2059" data-supplier="MedSource Distribution" data-expected="05 Jun 2026" data-units="540" data-total="$7,320.75" data-state-tone="received" data-state-label="Received" data-lines="Metformin 850 mg::40 packs|Atorvastatin 20 mg::24 packs|Paracetamol 500 mg::60 packs">
+                      <td class="mono fw-semibold">PO-2059</td><td>MedSource Distribution</td><td class="text-end mono">9</td><td class="text-end mono">540</td><td class="mono text-body-secondary">05 Jun 2026</td><td><span class="status-badge status-success">Received</span></td><td class="text-end mono">$7,320.75</td>
+                    </tr>
+                    <tr data-order-row data-id="PO-2058" data-supplier="Apex Pharma Supply" data-expected="04 Jun 2026" data-units="48" data-total="$612.40" data-state-tone="received" data-state-label="Received" data-lines="Cetirizine 10 mg::12 packs|Omeprazole 20 mg::8 packs">
+                      <td class="mono fw-semibold">PO-2058</td><td>Apex Pharma Supply</td><td class="text-end mono">2</td><td class="text-end mono">48</td><td class="mono text-body-secondary">04 Jun 2026</td><td><span class="status-badge status-success">Received</span></td><td class="text-end mono">$612.40</td>
+                    </tr>
+                    <tr data-order-row data-id="PO-2057" data-supplier="Caldwell Wholesale" data-expected="-" data-units="160" data-total="$2,090.00" data-state-tone="draft" data-state-label="Draft" data-lines="Salbutamol 100 mcg::20 packs|Lisinopril 10 mg::20 packs|Ibuprofen 200 mg::30 packs">
+                      <td class="mono fw-semibold">PO-2057</td><td>Caldwell Wholesale</td><td class="text-end mono">4</td><td class="text-end mono">160</td><td class="mono text-body-secondary">-</td><td><span class="status-badge status-neutral">Draft</span></td><td class="text-end mono">$2,090.00</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-12 col-xl-4">
+            <article class="card border-0 shadow-sm detail-card selected-panel">
+              <div class="card-body p-4 d-flex flex-column gap-4">
+                <div class="d-flex align-items-start justify-content-between gap-3">
+                  <div>
+                    <div class="page-kicker mb-2">Selected order</div>
+                    <div class="detail-title mono" data-order="id">PO-2061</div>
+                    <div class="detail-subtitle" data-order="supplier">MedSource Distribution</div>
+                  </div>
+                  <span class="status-badge status-warning" data-order="badge">In transit</span>
+                </div>
+                <div class="detail-list">
+                  <div class="detail-row"><span class="detail-row-label">Expected</span><span class="detail-row-value mono" data-order="expected">07 Jun 2026</span></div>
+                  <div class="detail-row"><span class="detail-row-label">Units</span><span class="detail-row-value mono" data-order="units">320</span></div>
+                  <div class="detail-row"><span class="detail-row-label">Total</span><span class="detail-row-value mono" data-order="total">$4,180.50</span></div>
+                </div>
+                <div>
+                  <div class="page-kicker mb-2">Line items preview</div>
+                  <div class="detail-list" data-order="lines"></div>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+  <script type="module" src="../assets/js/main.js"></script>
+</body>
+</html>

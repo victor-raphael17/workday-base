@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CA Pharmacy | Inventory</title>
+  <meta name="description" content="Inventory management frontend for CA Pharmacy.">
+  <link rel="icon" href="../assets/images/logo-mark.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="../assets/css/theme.css">
+  <link rel="stylesheet" href="../assets/css/app.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body data-page="inventory">
+  <div class="app-scrim d-lg-none" id="appScrim"></div>
+  <div class="app-shell">
+    <aside class="app-sidebar" id="appSidebar"></aside>
+    <div class="app-main">
+      <header class="app-topbar" id="appTopbar"></header>
+      <main class="app-content container-fluid py-4 px-3 px-xl-4">
+        <section class="d-flex flex-column flex-xl-row align-items-xl-end justify-content-between gap-3 mb-4">
+          <div>
+            <span class="page-kicker">Stock control</span>
+            <h1 class="page-title mb-1">Inventory</h1>
+            <p class="page-subtitle mb-0">Track on-hand quantities, expiry dates, and reorder priorities.</p>
+          </div>
+          <div class="d-flex flex-wrap gap-2">
+            <button class="btn btn-outline-secondary btn-sm px-3" type="button">Export</button>
+            <button class="btn btn-outline-secondary btn-sm px-3" type="button">Receive stock</button>
+            <button class="btn btn-success btn-sm px-3" type="button">Add medication</button>
+          </div>
+        </section>
+
+        <section class="row g-4">
+          <div class="col-12 col-xl-8">
+            <div class="d-flex flex-column flex-lg-row justify-content-between gap-3 mb-3">
+              <div class="filter-toolbar">
+                <button class="filter-chip active" type="button" data-stock-filter="all">All items <span class="mono">12</span></button>
+                <button class="filter-chip" type="button" data-stock-filter="low">Low / out <span class="mono">4</span></button>
+                <button class="filter-chip" type="button" data-stock-filter="expiring">Expiring <span class="mono">1</span></button>
+                <button class="filter-chip" type="button" data-stock-filter="controlled">Controlled <span class="mono">2</span></button>
+              </div>
+              <label class="inventory-search mb-0">
+                <i data-lucide="search"></i>
+                <input type="search" placeholder="Search name or SKU..." data-inventory-search>
+              </label>
+            </div>
+
+            <article class="card border-0 shadow-sm list-card">
+              <div class="table-responsive px-4 py-2">
+                <table class="table align-middle data-table mb-0">
+                  <thead>
+                    <tr>
+                      <th scope="col">Medication</th>
+                      <th scope="col">SKU</th>
+                      <th scope="col">Category</th>
+                      <th scope="col" class="text-end">On hand</th>
+                      <th scope="col">Expiry</th>
+                      <th scope="col">Status</th>
+                      <th scope="col" class="text-end">Price</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr data-inventory-row data-name="Amoxicillin" data-strength="500 mg" data-form="Capsule" data-category="Antibiotics" data-on-hand="24" data-reorder="10" data-expiry="12 Aug 2026" data-price="$12.40" data-status="in" data-badge-label="In stock" data-controlled="false" data-sku="CA-AMX-500">
+                      <td><div class="fw-semibold">Amoxicillin</div><div class="small text-body-secondary">500 mg · Capsule</div></td><td class="mono text-body-secondary">CA-AMX-500</td><td>Antibiotics</td><td class="text-end mono">24</td><td class="mono text-body-secondary">12 Aug 2026</td><td><span class="status-badge status-success">In stock</span></td><td class="text-end mono">$12.40</td>
+                    </tr>
+                    <tr data-inventory-row data-name="Ibuprofen" data-strength="200 mg" data-form="Tablet" data-category="Analgesics" data-on-hand="8" data-reorder="20" data-expiry="03 Mar 2027" data-price="$5.10" data-status="low" data-badge-label="Low stock" data-controlled="false" data-sku="CA-IBU-200">
+                      <td><div class="fw-semibold">Ibuprofen</div><div class="small text-body-secondary">200 mg · Tablet</div></td><td class="mono text-body-secondary">CA-IBU-200</td><td>Analgesics</td><td class="text-end mono">8</td><td class="mono text-body-secondary">03 Mar 2027</td><td><span class="status-badge status-warning">Low stock</span></td><td class="text-end mono">$5.10</td>
+                    </tr>
+                    <tr data-inventory-row data-name="Metformin" data-strength="850 mg" data-form="Tablet" data-category="Diabetes" data-on-hand="61" data-reorder="25" data-expiry="21 Nov 2026" data-price="$9.75" data-status="in" data-badge-label="In stock" data-controlled="false" data-sku="CA-MET-850">
+                      <td><div class="fw-semibold">Metformin</div><div class="small text-body-secondary">850 mg · Tablet</div></td><td class="mono text-body-secondary">CA-MET-850</td><td>Diabetes</td><td class="text-end mono">61</td><td class="mono text-body-secondary">21 Nov 2026</td><td><span class="status-badge status-success">In stock</span></td><td class="text-end mono">$9.75</td>
+                    </tr>
+                    <tr data-inventory-row data-name="Oxycodone" data-strength="5 mg" data-form="Tablet" data-category="Opioids" data-on-hand="14" data-reorder="10" data-expiry="09 Jun 2026" data-price="$28.90" data-status="controlled" data-badge-label="Controlled" data-controlled="true" data-sku="CA-OXY-05">
+                      <td><div class="fw-semibold">Oxycodone</div><div class="small text-body-secondary">5 mg · Tablet</div></td><td class="mono text-body-secondary">CA-OXY-05</td><td>Opioids</td><td class="text-end mono">14</td><td class="mono text-body-secondary">09 Jun 2026</td><td><span class="status-badge status-controlled">Controlled</span></td><td class="text-end mono">$28.90</td>
+                    </tr>
+                    <tr data-inventory-row data-name="Lisinopril" data-strength="10 mg" data-form="Tablet" data-category="Cardiovascular" data-on-hand="0" data-reorder="15" data-expiry="30 Jan 2027" data-price="$7.30" data-status="out" data-badge-label="Out of stock" data-controlled="false" data-sku="CA-LIS-10">
+                      <td><div class="fw-semibold">Lisinopril</div><div class="small text-body-secondary">10 mg · Tablet</div></td><td class="mono text-body-secondary">CA-LIS-10</td><td>Cardiovascular</td><td class="text-end mono">0</td><td class="mono text-body-secondary">30 Jan 2027</td><td><span class="status-badge status-danger">Out of stock</span></td><td class="text-end mono">$7.30</td>
+                    </tr>
+                    <tr data-inventory-row data-name="Salbutamol" data-strength="100 mcg" data-form="Inhaler" data-category="Respiratory" data-on-hand="5" data-reorder="12" data-expiry="18 Jul 2026" data-price="$14.20" data-status="low" data-badge-label="Low stock" data-controlled="false" data-sku="CA-SAL-100">
+                      <td><div class="fw-semibold">Salbutamol</div><div class="small text-body-secondary">100 mcg · Inhaler</div></td><td class="mono text-body-secondary">CA-SAL-100</td><td>Respiratory</td><td class="text-end mono">5</td><td class="mono text-body-secondary">18 Jul 2026</td><td><span class="status-badge status-warning">Low stock</span></td><td class="text-end mono">$14.20</td>
+                    </tr>
+                    <tr data-inventory-row data-name="Diazepam" data-strength="5 mg" data-form="Tablet" data-category="Anxiolytics" data-on-hand="9" data-reorder="8" data-expiry="02 May 2026" data-price="$19.60" data-status="controlled" data-badge-label="Controlled" data-controlled="true" data-sku="CA-DIA-05">
+                      <td><div class="fw-semibold">Diazepam</div><div class="small text-body-secondary">5 mg · Tablet</div></td><td class="mono text-body-secondary">CA-DIA-05</td><td>Anxiolytics</td><td class="text-end mono">9</td><td class="mono text-body-secondary">02 May 2026</td><td><span class="status-badge status-controlled">Controlled</span></td><td class="text-end mono">$19.60</td>
+                    </tr>
+                    <tr data-inventory-row data-name="Omeprazole" data-strength="20 mg" data-form="Capsule" data-category="Gastro" data-on-hand="33" data-reorder="20" data-expiry="05 Apr 2026" data-price="$8.45" data-status="expiring" data-badge-label="Expiring soon" data-controlled="false" data-sku="CA-OME-20">
+                      <td><div class="fw-semibold">Omeprazole</div><div class="small text-body-secondary">20 mg · Capsule</div></td><td class="mono text-body-secondary">CA-OME-20</td><td>Gastro</td><td class="text-end mono">33</td><td class="mono text-warning-emphasis">05 Apr 2026</td><td><span class="status-badge status-warning">Expiring soon</span></td><td class="text-end mono">$8.45</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-12 col-xl-4">
+            <article class="card border-0 shadow-sm detail-card selected-panel">
+              <div class="card-body p-4 d-flex flex-column gap-4">
+                <div class="d-flex align-items-start justify-content-between gap-3">
+                  <div>
+                    <div class="page-kicker mb-2">Selected medication</div>
+                    <div class="detail-title" data-detail="name">Amoxicillin</div>
+                    <div class="detail-subtitle" data-detail="subtitle">500 mg · Capsule · Antibiotics</div>
+                  </div>
+                  <span class="status-badge status-success" data-detail="badge">In stock</span>
+                </div>
+                <div class="detail-list">
+                  <div class="detail-row"><span class="detail-row-label">On hand</span><span class="detail-row-value mono" data-detail="onHand">24 packs</span></div>
+                  <div class="detail-row"><span class="detail-row-label">Reorder point</span><span class="detail-row-value mono" data-detail="reorder">10 packs</span></div>
+                  <div class="detail-row"><span class="detail-row-label">Expiry</span><span class="detail-row-value mono" data-detail="expiry">12 Aug 2026</span></div>
+                  <div class="detail-row"><span class="detail-row-label">Unit price</span><span class="detail-row-value mono" data-detail="price">$12.40</span></div>
+                </div>
+                <div>
+                  <div class="page-kicker mb-2">Suggested actions</div>
+                  <div class="chip-row">
+                    <span class="chip">Receive stock</span>
+                    <span class="chip">Create order</span>
+                    <span class="chip">Edit record</span>
+                  </div>
+                </div>
+                <div class="note-block">Inventory is already split into normal HTML, CSS, and JavaScript. The next step is wiring these states to API endpoints once the backend is ready.</div>
+              </div>
+            </article>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+  <script type="module" src="../assets/js/main.js"></script>
+</body>
+</html>

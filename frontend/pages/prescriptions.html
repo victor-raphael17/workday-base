@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CA Pharmacy | Prescriptions</title>
+  <meta name="description" content="Prescription workflow frontend for CA Pharmacy.">
+  <link rel="icon" href="../assets/images/logo-mark.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="../assets/css/theme.css">
+  <link rel="stylesheet" href="../assets/css/app.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body data-page="prescriptions">
+  <div class="app-scrim d-lg-none" id="appScrim"></div>
+  <div class="app-shell">
+    <aside class="app-sidebar" id="appSidebar"></aside>
+    <div class="app-main">
+      <header class="app-topbar" id="appTopbar"></header>
+      <main class="app-content container-fluid py-4 px-3 px-xl-4">
+        <section class="d-flex flex-column flex-xl-row align-items-xl-end justify-content-between gap-3 mb-4">
+          <div>
+            <span class="page-kicker">Workflow board</span>
+            <h1 class="page-title mb-1">Prescriptions</h1>
+            <p class="page-subtitle mb-0">Monitor intake, verification, pickup, and dispensing from one board.</p>
+          </div>
+          <div class="d-flex flex-wrap gap-2">
+            <button class="btn btn-outline-secondary btn-sm px-3" type="button">Scan script</button>
+            <button class="btn btn-success btn-sm px-3" type="button">New prescription</button>
+          </div>
+        </section>
+
+        <section class="row g-4">
+          <div class="col-12 col-xl-3">
+            <div class="queue-column">
+              <div class="queue-column-head"><h2 class="section-title mb-0">New</h2><span class="queue-column-count">1</span></div>
+              <article class="queue-card p-3">
+                <div class="d-flex justify-content-between gap-2 mb-2"><span class="queue-card-id">RX-10293</span><span class="queue-card-id">2 min ago</span></div>
+                <div class="queue-card-title">Amara Okafor</div>
+                <div class="queue-card-meta mt-1">Amoxicillin 500 mg · <span class="mono">21 caps</span></div>
+                <div class="queue-card-footer mt-3"><span class="small text-body-secondary">Dr. L. Hahn</span></div>
+              </article>
+            </div>
+          </div>
+          <div class="col-12 col-xl-3">
+            <div class="queue-column">
+              <div class="queue-column-head"><h2 class="section-title mb-0">Verifying</h2><span class="queue-column-count">2</span></div>
+              <article class="queue-card p-3">
+                <div class="d-flex justify-content-between gap-2 mb-2"><span class="queue-card-id">RX-10294</span><span class="queue-card-id">9 min ago</span></div>
+                <div class="queue-card-title">James Whitlock</div>
+                <div class="queue-card-meta mt-1">Oxycodone 5 mg · <span class="mono">14 tabs</span></div>
+                <div class="queue-card-footer mt-3"><span class="small text-body-secondary">Dr. P. Adeyemi</span><span class="status-badge status-controlled">Controlled</span></div>
+              </article>
+              <article class="queue-card p-3">
+                <div class="d-flex justify-content-between gap-2 mb-2"><span class="queue-card-id">RX-10295</span><span class="queue-card-id">14 min ago</span></div>
+                <div class="queue-card-title">Sofia Marchetti</div>
+                <div class="queue-card-meta mt-1">Lisinopril 10 mg · <span class="mono">30 tabs</span></div>
+                <div class="queue-card-footer mt-3"><span class="small text-body-secondary">Dr. R. Singh</span><span class="status-badge status-danger">Interaction</span></div>
+              </article>
+            </div>
+          </div>
+          <div class="col-12 col-xl-3">
+            <div class="queue-column">
+              <div class="queue-column-head"><h2 class="section-title mb-0">Ready for pickup</h2><span class="queue-column-count">2</span></div>
+              <article class="queue-card p-3">
+                <div class="d-flex justify-content-between gap-2 mb-2"><span class="queue-card-id">RX-10296</span><span class="queue-card-id">26 min ago</span></div>
+                <div class="queue-card-title">Daniel Kim</div>
+                <div class="queue-card-meta mt-1">Salbutamol 100 mcg · <span class="mono">1 inhaler</span></div>
+                <div class="queue-card-footer mt-3"><span class="small text-body-secondary">Dr. L. Hahn</span></div>
+              </article>
+              <article class="queue-card p-3">
+                <div class="d-flex justify-content-between gap-2 mb-2"><span class="queue-card-id">RX-10297</span><span class="queue-card-id">41 min ago</span></div>
+                <div class="queue-card-title">Grace Mensah</div>
+                <div class="queue-card-meta mt-1">Metformin 850 mg · <span class="mono">56 tabs</span></div>
+                <div class="queue-card-footer mt-3"><span class="small text-body-secondary">Dr. R. Singh</span></div>
+              </article>
+            </div>
+          </div>
+          <div class="col-12 col-xl-3">
+            <div class="queue-column">
+              <div class="queue-column-head"><h2 class="section-title mb-0">Dispensed</h2><span class="queue-column-count">1</span></div>
+              <article class="queue-card p-3">
+                <div class="d-flex justify-content-between gap-2 mb-2"><span class="queue-card-id">RX-10298</span><span class="queue-card-id">1 hr ago</span></div>
+                <div class="queue-card-title">Tomas Rivera</div>
+                <div class="queue-card-meta mt-1">Diazepam 5 mg · <span class="mono">10 tabs</span></div>
+                <div class="queue-card-footer mt-3"><span class="small text-body-secondary">Dr. P. Adeyemi</span><span class="status-badge status-controlled">Controlled</span></div>
+              </article>
+              <div class="muted-note">Controlled prescriptions stay visible after dispensing for audit review.</div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+  <script type="module" src="../assets/js/main.js"></script>
+</body>
+</html>
