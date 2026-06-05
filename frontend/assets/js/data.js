@@ -6,11 +6,11 @@ export const inventoryItems = [
   { sku: "CA-LIS-10", name: "Lisinopril", strength: "10 mg", form: "Tablet", category: "Cardiovascular", onHand: 0, reorder: 15, price: 7.3, expiry: "30 Jan 2027", controlled: false, status: "out" },
   { sku: "CA-SAL-100", name: "Salbutamol", strength: "100 mcg", form: "Inhaler", category: "Respiratory", onHand: 5, reorder: 12, price: 14.2, expiry: "18 Jul 2026", controlled: false, status: "low" },
   { sku: "CA-ATO-20", name: "Atorvastatin", strength: "20 mg", form: "Tablet", category: "Cardiovascular", onHand: 88, reorder: 30, price: 11.05, expiry: "14 Sep 2027", controlled: false, status: "in" },
-  { sku: "CA-DIA-05", name: "Diazepam", strength: "5 mg", form: "Tablet", category: "Anxiolytics", onHand: 9, reorder: 8, price: 19.6, expiry: "02 May 2026", controlled: true, status: "controlled" },
+  { sku: "CA-DIA-05", name: "Diazepam", strength: "5 mg", form: "Tablet", category: "Anxiolytics", onHand: 9, reorder: 8, price: 19.6, expiry: "02 May 2027", controlled: true, status: "controlled" },
   { sku: "CA-PAR-500", name: "Paracetamol", strength: "500 mg", form: "Tablet", category: "Analgesics", onHand: 142, reorder: 40, price: 3.8, expiry: "27 Dec 2027", controlled: false, status: "in" },
-  { sku: "CA-OME-20", name: "Omeprazole", strength: "20 mg", form: "Capsule", category: "Gastro", onHand: 33, reorder: 20, price: 8.45, expiry: "05 Apr 2026", controlled: false, status: "expiring" },
+  { sku: "CA-OME-20", name: "Omeprazole", strength: "20 mg", form: "Capsule", category: "Gastro", onHand: 33, reorder: 20, price: 8.45, expiry: "28 Jun 2026", controlled: false, status: "expiring" },
   { sku: "CA-CET-10", name: "Cetirizine", strength: "10 mg", form: "Tablet", category: "Antihistamine", onHand: 56, reorder: 25, price: 4.6, expiry: "11 Oct 2027", controlled: false, status: "in" },
-  { sku: "CA-AML-5", name: "Amlodipine", strength: "5 mg", form: "Tablet", category: "Cardiovascular", onHand: 18, reorder: 20, price: 6.9, expiry: "22 Feb 2026", controlled: false, status: "low" },
+  { sku: "CA-AML-5", name: "Amlodipine", strength: "5 mg", form: "Tablet", category: "Cardiovascular", onHand: 18, reorder: 20, price: 6.9, expiry: "22 Feb 2027", controlled: false, status: "low" },
 ];
 
 export const prescriptionQueue = [

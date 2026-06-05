@@ -8,6 +8,30 @@ body {
   min-height: 100vh;
 }
 
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 100;
+  padding: 0.6rem 1rem;
+  border-radius: 0.6rem;
+  background: var(--slate-900);
+  color: #ffffff;
+  font-weight: 600;
+  text-decoration: none;
+  transform: translateY(-150%);
+  transition: transform 120ms ease;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+  color: #ffffff;
+}
+
+.app-content:focus {
+  outline: none;
+}
+
 .app-sidebar {
   position: sticky;
   top: 0;
@@ -448,6 +472,11 @@ body {
   cursor: pointer;
 }
 
+.data-table tbody tr:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: -2px;
+}
+
 .data-table tbody tr.table-active {
   --bs-table-active-bg: var(--green-50);
   --bs-table-active-color: var(--fg-strong);
@@ -561,6 +590,11 @@ body {
   border-color: var(--green-400);
   transform: translateY(-1px);
   box-shadow: var(--shadow-sm);
+}
+
+.product-card:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
 }
 
 .product-title {

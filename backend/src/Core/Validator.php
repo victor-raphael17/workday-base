@@ -36,14 +36,15 @@ final class Validator
             $present = array_key_exists($field, $data);
             $value = $present ? $data[$field] : null;
 
-            $isRequired = isset($ruleSet['required']);
-            $isNullable = isset($ruleSet['nullable']);
+            $isRequired = array_key_exists('required', $ruleSet);
+            $isNullable = array_key_exists('nullable', $ruleSet);
+            $isEmpty = !$present || $value === null || (is_string($value) && trim($value) === '');
 
-            if (!$present || $value === null) {
-                if ($isRequired && !($present && $value === null && $isNullable)) {
-                    $errors[$field][] = "The {$field} field is required.";
-                } elseif ($present && $value === null && $isNullable) {
+            if ($isEmpty) {
+                if ($present && $value === null && $isNullable) {
                     $validated[$field] = null;
+                } elseif ($isRequired) {
+                    $errors[$field][] = "The {$field} field is required.";
                 }
                 continue;
             }
@@ -70,7 +71,7 @@ final class Validator
     }
 
     /**
-     * @return array<string, string|null> rule name => argument (or null)
+     * @return array<string, string|null> rule name => argument (or null for valueless rules)
      */
     private static function parse(string $ruleString): array
     {
@@ -94,7 +95,7 @@ final class Validator
      */
     private static function applyType(string $field, mixed $value, array $rules, array &$errors): mixed
     {
-        if (isset($rules['integer'])) {
+        if (array_key_exists('integer', $rules)) {
             if (!is_int($value) && !(is_string($value) && preg_match('/^-?\d+$/', $value))) {
                 $errors[] = "The {$field} field must be an integer.";
                 return $value;
@@ -102,7 +103,7 @@ final class Validator
             return (int) $value;
         }
 
-        if (isset($rules['numeric'])) {
+        if (array_key_exists('numeric', $rules)) {
             if (!is_numeric($value)) {
                 $errors[] = "The {$field} field must be a number.";
                 return $value;
@@ -110,7 +111,7 @@ final class Validator
             return $value + 0;
         }
 
-        if (isset($rules['boolean'])) {
+        if (array_key_exists('boolean', $rules)) {
             if (is_bool($value)) {
                 return $value;
             }
@@ -121,21 +122,21 @@ final class Validator
             return $value;
         }
 
-        if (isset($rules['date'])) {
+        if (array_key_exists('date', $rules)) {
             if (!is_string($value) || strtotime($value) === false) {
                 $errors[] = "The {$field} field must be a valid date.";
             }
             return $value;
         }
 
-        if (isset($rules['email'])) {
+        if (array_key_exists('email', $rules)) {
             if (!is_string($value) || !filter_var($value, FILTER_VALIDATE_EMAIL)) {
                 $errors[] = "The {$field} field must be a valid email address.";
             }
             return $value;
         }
 
-        if (isset($rules['string'])) {
+        if (array_key_exists('string', $rules)) {
             if (!is_string($value)) {
                 $errors[] = "The {$field} field must be a string.";
                 return $value;
@@ -154,19 +155,19 @@ final class Validator
     {
         $size = is_string($value) ? mb_strlen($value) : (is_numeric($value) ? $value + 0 : null);
 
-        if (isset($rules['min']) && $size !== null && $size < (float) $rules['min']) {
+        if (array_key_exists('min', $rules) && $size !== null && $size < (float) $rules['min']) {
             $errors[] = is_string($value)
                 ? "The {$field} field must be at least {$rules['min']} characters."
                 : "The {$field} field must be at least {$rules['min']}.";
         }
 
-        if (isset($rules['max']) && $size !== null && $size > (float) $rules['max']) {
+        if (array_key_exists('max', $rules) && $size !== null && $size > (float) $rules['max']) {
             $errors[] = is_string($value)
                 ? "The {$field} field must not exceed {$rules['max']} characters."
                 : "The {$field} field must not exceed {$rules['max']}.";
         }
 
-        if (isset($rules['in'])) {
+        if (array_key_exists('in', $rules)) {
             $allowed = explode(',', (string) $rules['in']);
             if (!in_array((string) $value, $allowed, true)) {
                 $errors[] = "The {$field} field must be one of: " . implode(', ', $allowed) . '.';

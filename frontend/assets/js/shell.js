@@ -18,6 +18,24 @@ export function renderShell(pageId) {
     return;
   }
 
+  const initials = branch.shiftLead
+    .split(" ")
+    .map((word) => word[0])
+    .join("")
+    .slice(0, 2)
+    .toUpperCase();
+
+  const main = document.querySelector("main.app-content");
+  if (main && !document.querySelector(".skip-link")) {
+    main.id = main.id || "mainContent";
+    main.setAttribute("tabindex", "-1");
+    const skip = document.createElement("a");
+    skip.className = "skip-link";
+    skip.href = `#${main.id}`;
+    skip.textContent = "Skip to content";
+    document.body.prepend(skip);
+  }
+
   sidebar.innerHTML = `
     <div class="sidebar-brand">
       <img src="../assets/images/logo-mark.svg" alt="CA Pharmacy">
@@ -27,7 +45,7 @@ export function renderShell(pageId) {
       ${navigation.map((item) => {
         const count = navCounts(item.id);
         return `
-          <a class="sidebar-link ${pageId === item.id ? "active" : ""}" href="${item.href}">
+          <a class="sidebar-link ${pageId === item.id ? "active" : ""}" href="${item.href}" ${pageId === item.id ? 'aria-current="page"' : ""}>
             <i data-lucide="${item.icon}"></i>
             <span>${item.label}</span>
             ${count ? `<span class="sidebar-link-count">${count}</span>` : ""}
@@ -37,7 +55,7 @@ export function renderShell(pageId) {
     </nav>
     <div class="sidebar-section-label">Current shift</div>
     <div class="sidebar-shift-card d-flex align-items-center gap-3">
-      <span class="shift-avatar">JO</span>
+      <span class="shift-avatar">${initials}</span>
       <div>
         <div class="sidebar-shift-name">${branch.shiftLead}</div>
         <div class="sidebar-shift-role">${branch.role} · ${branch.name}</div>
@@ -82,4 +100,19 @@ export function bindShellEvents() {
 
   scrim?.addEventListener("click", closeNav);
   links.forEach((link) => link.addEventListener("click", closeNav));
+
+  const searchInput = document.querySelector(".topbar-search input");
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      closeNav();
+    }
+
+    const target = event.target;
+    const isTyping = target instanceof HTMLElement && ["INPUT", "TEXTAREA", "SELECT"].includes(target.tagName);
+    if (event.key === "/" && !isTyping && searchInput) {
+      event.preventDefault();
+      searchInput.focus();
+    }
+  });
 }

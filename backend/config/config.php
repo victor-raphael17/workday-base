@@ -16,6 +16,8 @@ return [
         'name'  => Env::get('APP_NAME', 'CA Pharmacy API'),
         'env'   => Env::get('APP_ENV', 'local'),
         'debug' => Env::bool('APP_DEBUG', true),
+        // Sales tax applied at point of sale, as a fraction (e.g. 0.08 = 8%).
+        'tax_rate' => (float) Env::get('TAX_RATE', '0'),
     ],
 
     'db' => [
