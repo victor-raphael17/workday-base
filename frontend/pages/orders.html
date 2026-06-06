@@ -29,17 +29,16 @@
           </div>
           <div class="d-flex flex-wrap gap-2">
             <button class="btn btn-outline-secondary btn-sm px-3" type="button">Receive stock</button>
-            <button class="btn btn-success btn-sm px-3" type="button">Create order</button>
+            <button class="btn btn-success btn-sm px-3" type="button" data-add-order>Create order</button>
           </div>
         </section>
 
         <section class="banner-alert mb-4">
           <i data-lucide="alert-triangle"></i>
-          <div class="flex-grow-1">
-            <strong>4 items are at or below the reorder point.</strong>
-            <p class="mono">Ibuprofen · Lisinopril · Salbutamol · Amlodipine</p>
+          <div class="flex-grow-1" data-reorder-banner>
+            <strong>Checking stock levels…</strong>
           </div>
-          <button class="btn btn-success btn-sm px-3" type="button">Create reorder</button>
+          <button class="btn btn-success btn-sm px-3" type="button" data-add-order>Create reorder</button>
         </section>
 
         <section class="row g-4">
@@ -58,23 +57,7 @@
                       <th scope="col" class="text-end">Total</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr data-order-row data-id="PO-2061" data-supplier="MedSource Distribution" data-expected="07 Jun 2026" data-units="320" data-total="$4,180.50" data-state-tone="transit" data-state-label="In transit" data-lines="Amoxicillin 500 mg::24 packs|Salbutamol 100 mcg::16 packs|Omeprazole 20 mg::12 packs">
-                      <td class="mono fw-semibold">PO-2061</td><td>MedSource Distribution</td><td class="text-end mono">6</td><td class="text-end mono">320</td><td class="mono text-body-secondary">07 Jun 2026</td><td><span class="status-badge status-warning">In transit</span></td><td class="text-end mono">$4,180.50</td>
-                    </tr>
-                    <tr data-order-row data-id="PO-2060" data-supplier="Caldwell Wholesale" data-expected="06 Jun 2026" data-units="90" data-total="$1,245.00" data-state-tone="submitted" data-state-label="Submitted" data-lines="Ibuprofen 200 mg::20 packs|Amlodipine 5 mg::18 packs|Lisinopril 10 mg::12 packs">
-                      <td class="mono fw-semibold">PO-2060</td><td>Caldwell Wholesale</td><td class="text-end mono">3</td><td class="text-end mono">90</td><td class="mono text-body-secondary">06 Jun 2026</td><td><span class="status-badge status-info">Submitted</span></td><td class="text-end mono">$1,245.00</td>
-                    </tr>
-                    <tr data-order-row data-id="PO-2059" data-supplier="MedSource Distribution" data-expected="05 Jun 2026" data-units="540" data-total="$7,320.75" data-state-tone="received" data-state-label="Received" data-lines="Metformin 850 mg::40 packs|Atorvastatin 20 mg::24 packs|Paracetamol 500 mg::60 packs">
-                      <td class="mono fw-semibold">PO-2059</td><td>MedSource Distribution</td><td class="text-end mono">9</td><td class="text-end mono">540</td><td class="mono text-body-secondary">05 Jun 2026</td><td><span class="status-badge status-success">Received</span></td><td class="text-end mono">$7,320.75</td>
-                    </tr>
-                    <tr data-order-row data-id="PO-2058" data-supplier="Apex Pharma Supply" data-expected="04 Jun 2026" data-units="48" data-total="$612.40" data-state-tone="received" data-state-label="Received" data-lines="Cetirizine 10 mg::12 packs|Omeprazole 20 mg::8 packs">
-                      <td class="mono fw-semibold">PO-2058</td><td>Apex Pharma Supply</td><td class="text-end mono">2</td><td class="text-end mono">48</td><td class="mono text-body-secondary">04 Jun 2026</td><td><span class="status-badge status-success">Received</span></td><td class="text-end mono">$612.40</td>
-                    </tr>
-                    <tr data-order-row data-id="PO-2057" data-supplier="Caldwell Wholesale" data-expected="-" data-units="160" data-total="$2,090.00" data-state-tone="draft" data-state-label="Draft" data-lines="Salbutamol 100 mcg::20 packs|Lisinopril 10 mg::20 packs|Ibuprofen 200 mg::30 packs">
-                      <td class="mono fw-semibold">PO-2057</td><td>Caldwell Wholesale</td><td class="text-end mono">4</td><td class="text-end mono">160</td><td class="mono text-body-secondary">-</td><td><span class="status-badge status-neutral">Draft</span></td><td class="text-end mono">$2,090.00</td>
-                    </tr>
-                  </tbody>
+                  <tbody data-order-body></tbody>
                 </table>
               </div>
             </article>
@@ -100,6 +83,7 @@
                   <div class="page-kicker mb-2">Line items preview</div>
                   <div class="detail-list" data-order="lines"></div>
                 </div>
+                <div class="d-flex flex-wrap gap-2" data-order="actions"></div>
               </div>
             </article>
           </div>

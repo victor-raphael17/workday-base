@@ -30,7 +30,7 @@
           <div class="d-flex flex-wrap gap-2">
             <button class="btn btn-outline-secondary btn-sm px-3" type="button">Export</button>
             <button class="btn btn-outline-secondary btn-sm px-3" type="button">Receive stock</button>
-            <button class="btn btn-success btn-sm px-3" type="button">Add medication</button>
+            <button class="btn btn-success btn-sm px-3" type="button" data-add-medication>Add medication</button>
           </div>
         </section>
 
@@ -63,32 +63,7 @@
                       <th scope="col" class="text-end">Price</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr data-inventory-row data-name="Amoxicillin" data-strength="500 mg" data-form="Capsule" data-category="Antibiotics" data-on-hand="24" data-reorder="10" data-expiry="12 Aug 2026" data-price="$12.40" data-status="in" data-badge-label="In stock" data-controlled="false" data-sku="CA-AMX-500">
-                      <td><div class="fw-semibold">Amoxicillin</div><div class="small text-body-secondary">500 mg · Capsule</div></td><td class="mono text-body-secondary">CA-AMX-500</td><td>Antibiotics</td><td class="text-end mono">24</td><td class="mono text-body-secondary">12 Aug 2026</td><td><span class="status-badge status-success">In stock</span></td><td class="text-end mono">$12.40</td>
-                    </tr>
-                    <tr data-inventory-row data-name="Ibuprofen" data-strength="200 mg" data-form="Tablet" data-category="Analgesics" data-on-hand="8" data-reorder="20" data-expiry="03 Mar 2027" data-price="$5.10" data-status="low" data-badge-label="Low stock" data-controlled="false" data-sku="CA-IBU-200">
-                      <td><div class="fw-semibold">Ibuprofen</div><div class="small text-body-secondary">200 mg · Tablet</div></td><td class="mono text-body-secondary">CA-IBU-200</td><td>Analgesics</td><td class="text-end mono">8</td><td class="mono text-body-secondary">03 Mar 2027</td><td><span class="status-badge status-warning">Low stock</span></td><td class="text-end mono">$5.10</td>
-                    </tr>
-                    <tr data-inventory-row data-name="Metformin" data-strength="850 mg" data-form="Tablet" data-category="Diabetes" data-on-hand="61" data-reorder="25" data-expiry="21 Nov 2026" data-price="$9.75" data-status="in" data-badge-label="In stock" data-controlled="false" data-sku="CA-MET-850">
-                      <td><div class="fw-semibold">Metformin</div><div class="small text-body-secondary">850 mg · Tablet</div></td><td class="mono text-body-secondary">CA-MET-850</td><td>Diabetes</td><td class="text-end mono">61</td><td class="mono text-body-secondary">21 Nov 2026</td><td><span class="status-badge status-success">In stock</span></td><td class="text-end mono">$9.75</td>
-                    </tr>
-                    <tr data-inventory-row data-name="Oxycodone" data-strength="5 mg" data-form="Tablet" data-category="Opioids" data-on-hand="14" data-reorder="10" data-expiry="09 Jun 2026" data-price="$28.90" data-status="controlled" data-badge-label="Controlled" data-controlled="true" data-sku="CA-OXY-05">
-                      <td><div class="fw-semibold">Oxycodone</div><div class="small text-body-secondary">5 mg · Tablet</div></td><td class="mono text-body-secondary">CA-OXY-05</td><td>Opioids</td><td class="text-end mono">14</td><td class="mono text-body-secondary">09 Jun 2026</td><td><span class="status-badge status-controlled">Controlled</span></td><td class="text-end mono">$28.90</td>
-                    </tr>
-                    <tr data-inventory-row data-name="Lisinopril" data-strength="10 mg" data-form="Tablet" data-category="Cardiovascular" data-on-hand="0" data-reorder="15" data-expiry="30 Jan 2027" data-price="$7.30" data-status="out" data-badge-label="Out of stock" data-controlled="false" data-sku="CA-LIS-10">
-                      <td><div class="fw-semibold">Lisinopril</div><div class="small text-body-secondary">10 mg · Tablet</div></td><td class="mono text-body-secondary">CA-LIS-10</td><td>Cardiovascular</td><td class="text-end mono">0</td><td class="mono text-body-secondary">30 Jan 2027</td><td><span class="status-badge status-danger">Out of stock</span></td><td class="text-end mono">$7.30</td>
-                    </tr>
-                    <tr data-inventory-row data-name="Salbutamol" data-strength="100 mcg" data-form="Inhaler" data-category="Respiratory" data-on-hand="5" data-reorder="12" data-expiry="18 Jul 2026" data-price="$14.20" data-status="low" data-badge-label="Low stock" data-controlled="false" data-sku="CA-SAL-100">
-                      <td><div class="fw-semibold">Salbutamol</div><div class="small text-body-secondary">100 mcg · Inhaler</div></td><td class="mono text-body-secondary">CA-SAL-100</td><td>Respiratory</td><td class="text-end mono">5</td><td class="mono text-body-secondary">18 Jul 2026</td><td><span class="status-badge status-warning">Low stock</span></td><td class="text-end mono">$14.20</td>
-                    </tr>
-                    <tr data-inventory-row data-name="Diazepam" data-strength="5 mg" data-form="Tablet" data-category="Anxiolytics" data-on-hand="9" data-reorder="8" data-expiry="02 May 2027" data-price="$19.60" data-status="controlled" data-badge-label="Controlled" data-controlled="true" data-sku="CA-DIA-05">
-                      <td><div class="fw-semibold">Diazepam</div><div class="small text-body-secondary">5 mg · Tablet</div></td><td class="mono text-body-secondary">CA-DIA-05</td><td>Anxiolytics</td><td class="text-end mono">9</td><td class="mono text-body-secondary">02 May 2027</td><td><span class="status-badge status-controlled">Controlled</span></td><td class="text-end mono">$19.60</td>
-                    </tr>
-                    <tr data-inventory-row data-name="Omeprazole" data-strength="20 mg" data-form="Capsule" data-category="Gastro" data-on-hand="33" data-reorder="20" data-expiry="28 Jun 2026" data-price="$8.45" data-status="expiring" data-badge-label="Expiring soon" data-controlled="false" data-sku="CA-OME-20">
-                      <td><div class="fw-semibold">Omeprazole</div><div class="small text-body-secondary">20 mg · Capsule</div></td><td class="mono text-body-secondary">CA-OME-20</td><td>Gastro</td><td class="text-end mono">33</td><td class="mono text-warning-emphasis">28 Jun 2026</td><td><span class="status-badge status-warning">Expiring soon</span></td><td class="text-end mono">$8.45</td>
-                    </tr>
-                  </tbody>
+                  <tbody data-inventory-body></tbody>
                 </table>
               </div>
             </article>
@@ -114,12 +89,9 @@
                 <div>
                   <div class="page-kicker mb-2">Suggested actions</div>
                   <div class="chip-row">
-                    <span class="chip">Receive stock</span>
-                    <span class="chip">Create order</span>
-                    <span class="chip">Edit record</span>
+                    <button type="button" class="chip chip-action" data-detail-action="receive">Adjust stock</button>
                   </div>
                 </div>
-                <div class="note-block">Inventory is already split into normal HTML, CSS, and JavaScript. The next step is wiring these states to API endpoints once the backend is ready.</div>
               </div>
             </article>
           </div>

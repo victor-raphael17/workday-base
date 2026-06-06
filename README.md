@@ -1,33 +1,52 @@
-CA Pharmacy is a system that controls pharmacy medication sells and stock. It consists of a frontend built with HTML, Bootstrap (CSS), and JavaScript, and an API developed using pure PHP. The frontend design is located in the /design-system directory, which provides a user-friendly interface for managing medication sales and stock. The database will be a PostgreSQL instance, dockerized for easy deployment and management. The frontend and backend will also be dockerized.
+CA Pharmacy is a system that controls pharmacy medication sales and stock. It consists of a frontend built with HTML, Bootstrap (CSS), and JavaScript, and an API developed using pure PHP. The frontend design is located in the `/design-system` directory. The database is a PostgreSQL instance. The frontend, backend, and database are all dockerized.
 
-Each part of the software will have a Dockefile.
+The frontend talks to the API over HTTP/JSON — every page (dashboard, inventory, point of sale, prescriptions, patients, orders) reads and writes live data through the endpoints documented in `backend/README.md`.
 
-## Frontend
+## Run the whole stack (Docker)
 
-The frontend lives in `frontend/` and runs with Vite.
+From the repository root:
 
-Install dependencies from the repository root:
+```bash
+docker compose up -d --build
+```
+
+This starts three services:
+
+| Service | URL | Notes |
+|---|---|---|
+| `web` (frontend) | <http://localhost:4173> | Vite build served by nginx |
+| `api` (backend) | <http://localhost:8080> | Pure-PHP JSON API |
+| `db` (PostgreSQL) | localhost:5432 | `schema.sql` + `seed.sql` loaded on first boot |
+
+Open <http://localhost:4173> and you land on the dashboard, populated from the API. `TAX_RATE` is set to `0.05` in `compose.yaml`, matching the 5% line shown at point of sale.
+
+## Frontend (local dev)
+
+The frontend lives in `frontend/` and runs with Vite. Install dependencies from the repository root:
 
 ```bash
 npm install
 ```
 
-Start the frontend development server:
+Start the dev server (proxying to the API at `http://localhost:8080` — start the backend with `docker compose up -d api db` first):
 
 ```bash
-npm run dev
+npm run dev      # http://localhost:4173
+npm run build    # production build into frontend/dist
+npm run preview  # preview the production build
 ```
 
-The Vite dev server runs on `http://localhost:4173/` and redirects the root entry to `frontend/pages/dashboard.html`.
+The API base URL is read from `VITE_API_BASE_URL` (see `frontend/.env.example`); it defaults to `http://localhost:8080`.
 
-Build the frontend for production:
+## Backend
+
+See `backend/README.md` for the full architecture and endpoint reference.
+
+## Tests
+
+An end-to-end smoke test exercises the core business rules (stock draw-down on sale, void restore, oversell rejection, purchase-order receiving, prescription dispensing) against a running API:
 
 ```bash
-npm run build
-```
-
-Preview the production build locally:
-
-```bash
-npm run preview
+docker compose up -d --build
+./backend/tests/smoke.sh
 ```

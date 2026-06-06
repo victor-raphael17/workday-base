@@ -29,69 +29,11 @@
           </div>
           <div class="d-flex flex-wrap gap-2">
             <button class="btn btn-outline-secondary btn-sm px-3" type="button">Scan script</button>
-            <button class="btn btn-success btn-sm px-3" type="button">New prescription</button>
+            <button class="btn btn-success btn-sm px-3" type="button" data-add-rx>New prescription</button>
           </div>
         </section>
 
-        <section class="row g-4">
-          <div class="col-12 col-xl-3">
-            <div class="queue-column">
-              <div class="queue-column-head"><h2 class="section-title mb-0">New</h2><span class="queue-column-count">1</span></div>
-              <article class="queue-card p-3">
-                <div class="d-flex justify-content-between gap-2 mb-2"><span class="queue-card-id">RX-10293</span><span class="queue-card-id">2 min ago</span></div>
-                <div class="queue-card-title">Amara Okafor</div>
-                <div class="queue-card-meta mt-1">Amoxicillin 500 mg · <span class="mono">21 caps</span></div>
-                <div class="queue-card-footer mt-3"><span class="small text-body-secondary">Dr. L. Hahn</span></div>
-              </article>
-            </div>
-          </div>
-          <div class="col-12 col-xl-3">
-            <div class="queue-column">
-              <div class="queue-column-head"><h2 class="section-title mb-0">Verifying</h2><span class="queue-column-count">2</span></div>
-              <article class="queue-card p-3">
-                <div class="d-flex justify-content-between gap-2 mb-2"><span class="queue-card-id">RX-10294</span><span class="queue-card-id">9 min ago</span></div>
-                <div class="queue-card-title">James Whitlock</div>
-                <div class="queue-card-meta mt-1">Oxycodone 5 mg · <span class="mono">14 tabs</span></div>
-                <div class="queue-card-footer mt-3"><span class="small text-body-secondary">Dr. P. Adeyemi</span><span class="status-badge status-controlled">Controlled</span></div>
-              </article>
-              <article class="queue-card p-3">
-                <div class="d-flex justify-content-between gap-2 mb-2"><span class="queue-card-id">RX-10295</span><span class="queue-card-id">14 min ago</span></div>
-                <div class="queue-card-title">Sofia Marchetti</div>
-                <div class="queue-card-meta mt-1">Lisinopril 10 mg · <span class="mono">30 tabs</span></div>
-                <div class="queue-card-footer mt-3"><span class="small text-body-secondary">Dr. R. Singh</span><span class="status-badge status-danger">Interaction</span></div>
-              </article>
-            </div>
-          </div>
-          <div class="col-12 col-xl-3">
-            <div class="queue-column">
-              <div class="queue-column-head"><h2 class="section-title mb-0">Ready for pickup</h2><span class="queue-column-count">2</span></div>
-              <article class="queue-card p-3">
-                <div class="d-flex justify-content-between gap-2 mb-2"><span class="queue-card-id">RX-10296</span><span class="queue-card-id">26 min ago</span></div>
-                <div class="queue-card-title">Daniel Kim</div>
-                <div class="queue-card-meta mt-1">Salbutamol 100 mcg · <span class="mono">1 inhaler</span></div>
-                <div class="queue-card-footer mt-3"><span class="small text-body-secondary">Dr. L. Hahn</span></div>
-              </article>
-              <article class="queue-card p-3">
-                <div class="d-flex justify-content-between gap-2 mb-2"><span class="queue-card-id">RX-10297</span><span class="queue-card-id">41 min ago</span></div>
-                <div class="queue-card-title">Grace Mensah</div>
-                <div class="queue-card-meta mt-1">Metformin 850 mg · <span class="mono">56 tabs</span></div>
-                <div class="queue-card-footer mt-3"><span class="small text-body-secondary">Dr. R. Singh</span></div>
-              </article>
-            </div>
-          </div>
-          <div class="col-12 col-xl-3">
-            <div class="queue-column">
-              <div class="queue-column-head"><h2 class="section-title mb-0">Dispensed</h2><span class="queue-column-count">1</span></div>
-              <article class="queue-card p-3">
-                <div class="d-flex justify-content-between gap-2 mb-2"><span class="queue-card-id">RX-10298</span><span class="queue-card-id">1 hr ago</span></div>
-                <div class="queue-card-title">Tomas Rivera</div>
-                <div class="queue-card-meta mt-1">Diazepam 5 mg · <span class="mono">10 tabs</span></div>
-                <div class="queue-card-footer mt-3"><span class="small text-body-secondary">Dr. P. Adeyemi</span><span class="status-badge status-controlled">Controlled</span></div>
-              </article>
-              <div class="muted-note">Controlled prescriptions stay visible after dispensing for audit review.</div>
-            </div>
-          </div>
-        </section>
+        <section class="row g-4" data-rx-board></section>
       </main>
     </div>
   </div>

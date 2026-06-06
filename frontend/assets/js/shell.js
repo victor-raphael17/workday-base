@@ -1,14 +1,6 @@
-import { branch, inventoryItems, navigation, prescriptionQueue } from "./data.js";
-
-function navCounts(id) {
-  if (id === "inventory") {
-    return inventoryItems.filter((item) => ["low", "out"].includes(item.status)).length;
-  }
-  if (id === "prescriptions") {
-    return prescriptionQueue.filter((item) => item.state !== "dispensed").length;
-  }
-  return 0;
-}
+import { branch, navigation } from "./data.js";
+import { api } from "./api.js";
+import logoMark from "../images/logo-mark.svg";
 
 export function renderShell(pageId) {
   const sidebar = document.getElementById("appSidebar");
@@ -38,20 +30,17 @@ export function renderShell(pageId) {
 
   sidebar.innerHTML = `
     <div class="sidebar-brand">
-      <img src="../assets/images/logo-mark.svg" alt="CA Pharmacy">
+      <img src="${logoMark}" alt="CA Pharmacy">
       <div class="sidebar-brand-title">CA <span>Pharmacy</span></div>
     </div>
     <nav class="sidebar-nav" aria-label="Primary navigation">
-      ${navigation.map((item) => {
-        const count = navCounts(item.id);
-        return `
+      ${navigation.map((item) => `
           <a class="sidebar-link ${pageId === item.id ? "active" : ""}" href="${item.href}" ${pageId === item.id ? 'aria-current="page"' : ""}>
             <i data-lucide="${item.icon}"></i>
             <span>${item.label}</span>
-            ${count ? `<span class="sidebar-link-count">${count}</span>` : ""}
+            <span class="sidebar-link-count d-none" data-nav-count="${item.id}"></span>
           </a>
-        `;
-      }).join("")}
+        `).join("")}
     </nav>
     <div class="sidebar-section-label">Current shift</div>
     <div class="sidebar-shift-card d-flex align-items-center gap-3">
@@ -85,6 +74,30 @@ export function renderShell(pageId) {
       </button>
     </div>
   `;
+}
+
+/** Populate the inventory / prescriptions badges from the dashboard summary. */
+export async function loadNavCounts() {
+  const setCount = (id, value) => {
+    const badge = document.querySelector(`[data-nav-count="${id}"]`);
+    if (!badge) {
+      return;
+    }
+    if (value) {
+      badge.textContent = value;
+      badge.classList.remove("d-none");
+    } else {
+      badge.classList.add("d-none");
+    }
+  };
+
+  try {
+    const summary = await api.dashboard();
+    setCount("inventory", summary.alerts?.low_stock || 0);
+    setCount("prescriptions", summary.dispensing_queue?.open || 0);
+  } catch {
+    // Counts are non-critical chrome; ignore if the API is unavailable.
+  }
 }
 
 export function bindShellEvents() {

@@ -38,8 +38,8 @@
             <article class="card border-0 shadow-sm metric-card h-100">
               <div class="card-body">
                 <div class="metric-label"><i data-lucide="dollar-sign"></i><span>Today's sales</span></div>
-                <div class="metric-value mono">$3,482.00</div>
-                <div class="metric-trend text-success"><i data-lucide="trending-up"></i><span>8.2% vs yesterday</span></div>
+                <div class="metric-value mono" data-metric="sales-total">—</div>
+                <div class="metric-trend text-body-secondary"><span>Completed sales today</span></div>
               </div>
             </article>
           </div>
@@ -47,8 +47,8 @@
             <article class="card border-0 shadow-sm metric-card h-100">
               <div class="card-body">
                 <div class="metric-label"><i data-lucide="receipt"></i><span>Transactions</span></div>
-                <div class="metric-value mono">128</div>
-                <div class="metric-trend text-body-secondary"><span>avg $27.20 / sale</span></div>
+                <div class="metric-value mono" data-metric="sales-count">—</div>
+                <div class="metric-trend text-body-secondary"><span data-metric="sales-avg">—</span></div>
               </div>
             </article>
           </div>
@@ -56,8 +56,8 @@
             <article class="card border-0 shadow-sm metric-card h-100">
               <div class="card-body">
                 <div class="metric-label"><i data-lucide="clipboard-list"></i><span>Dispensing queue</span></div>
-                <div class="metric-value mono">5</div>
-                <div class="metric-trend text-body-secondary"><span>2 awaiting verification</span></div>
+                <div class="metric-value mono" data-metric="queue">—</div>
+                <div class="metric-trend text-body-secondary"><span data-metric="queue-sub">—</span></div>
               </div>
             </article>
           </div>
@@ -65,7 +65,7 @@
             <article class="card border-0 shadow-sm metric-card metric-card-warning h-100">
               <div class="card-body">
                 <div class="metric-label"><i data-lucide="alert-triangle"></i><span>Low stock</span></div>
-                <div class="metric-value mono">4</div>
+                <div class="metric-value mono" data-metric="low-stock">—</div>
                 <div class="metric-trend text-warning-emphasis"><span>Below reorder point</span></div>
               </div>
             </article>
@@ -80,18 +80,10 @@
                   <h2 class="section-title mb-1">Sales this week</h2>
                   <p class="section-subtitle mb-0">Daily performance across the current week.</p>
                 </div>
-                <span class="mono text-body-secondary fw-semibold">$21,810.00 total</span>
+                <span class="mono text-body-secondary fw-semibold" data-sales-week-total>—</span>
               </div>
               <div class="card-body pt-0">
-                <div class="sales-chart" aria-label="Weekly sales chart">
-                  <div class="sales-bar-col"><div class="sales-bar" style="height: 71%"></div><span class="mono">Mon</span></div>
-                  <div class="sales-bar-col"><div class="sales-bar" style="height: 78%"></div><span class="mono">Tue</span></div>
-                  <div class="sales-bar-col"><div class="sales-bar" style="height: 65%"></div><span class="mono">Wed</span></div>
-                  <div class="sales-bar-col"><div class="sales-bar" style="height: 86%"></div><span class="mono">Thu</span></div>
-                  <div class="sales-bar-col"><div class="sales-bar sales-bar-peak" style="height: 100%"></div><span class="mono">Fri</span></div>
-                  <div class="sales-bar-col"><div class="sales-bar" style="height: 93%"></div><span class="mono">Sat</span></div>
-                  <div class="sales-bar-col"><div class="sales-bar" style="height: 49%"></div><span class="mono">Sun</span></div>
-                </div>
+                <div class="sales-chart" aria-label="Weekly sales chart" data-sales-chart></div>
               </div>
             </article>
           </div>
@@ -104,48 +96,7 @@
                 </div>
                 <a class="btn btn-link btn-sm text-decoration-none px-0" href="inventory.html">Open inventory</a>
               </div>
-              <div class="list-group list-group-flush">
-                <div class="list-group-item border-0 px-4 py-3">
-                  <div class="d-flex align-items-center gap-3">
-                    <span class="status-avatar"><i data-lucide="pill"></i></span>
-                    <div class="flex-grow-1">
-                      <div class="fw-semibold">Ibuprofen 200 mg</div>
-                      <div class="small text-body-secondary mono">8 on hand. Reorder at 20.</div>
-                    </div>
-                    <span class="status-badge status-warning">Low stock</span>
-                  </div>
-                </div>
-                <div class="list-group-item border-0 px-4 py-3">
-                  <div class="d-flex align-items-center gap-3">
-                    <span class="status-avatar status-avatar-controlled"><i data-lucide="shield-alert"></i></span>
-                    <div class="flex-grow-1">
-                      <div class="fw-semibold">Oxycodone 5 mg</div>
-                      <div class="small text-body-secondary mono">14 on hand. Controlled substance.</div>
-                    </div>
-                    <span class="status-badge status-controlled">Controlled</span>
-                  </div>
-                </div>
-                <div class="list-group-item border-0 px-4 py-3">
-                  <div class="d-flex align-items-center gap-3">
-                    <span class="status-avatar"><i data-lucide="package-x"></i></span>
-                    <div class="flex-grow-1">
-                      <div class="fw-semibold">Lisinopril 10 mg</div>
-                      <div class="small text-body-secondary mono">0 on hand. Reorder at 15.</div>
-                    </div>
-                    <span class="status-badge status-danger">Out of stock</span>
-                  </div>
-                </div>
-                <div class="list-group-item border-0 px-4 py-3">
-                  <div class="d-flex align-items-center gap-3">
-                    <span class="status-avatar"><i data-lucide="stethoscope"></i></span>
-                    <div class="flex-grow-1">
-                      <div class="fw-semibold">Salbutamol 100 mcg</div>
-                      <div class="small text-body-secondary mono">5 on hand. Reorder at 12.</div>
-                    </div>
-                    <span class="status-badge status-warning">Low stock</span>
-                  </div>
-                </div>
-              </div>
+              <div class="list-group list-group-flush" data-attention-list></div>
             </article>
           </div>
         </section>
@@ -171,68 +122,7 @@
                       <th scope="col">Status</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <div class="d-flex align-items-center gap-3">
-                          <span class="table-avatar">AO</span>
-                          <div>
-                            <div class="fw-semibold">Amara Okafor</div>
-                            <div class="small text-body-secondary mono">RX-10293</div>
-                          </div>
-                        </div>
-                      </td>
-                      <td>Amoxicillin 500 mg</td>
-                      <td>Dr. L. Hahn</td>
-                      <td><span class="text-body-secondary small">None</span></td>
-                      <td><span class="status-badge status-info">Verifying</span></td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="d-flex align-items-center gap-3">
-                          <span class="table-avatar table-avatar-controlled">JW</span>
-                          <div>
-                            <div class="fw-semibold">James Whitlock</div>
-                            <div class="small text-body-secondary mono">RX-10294</div>
-                          </div>
-                        </div>
-                      </td>
-                      <td>Oxycodone 5 mg</td>
-                      <td>Dr. P. Adeyemi</td>
-                      <td><span class="status-badge status-controlled">Controlled</span></td>
-                      <td><span class="status-badge status-info">Verifying</span></td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="d-flex align-items-center gap-3">
-                          <span class="table-avatar">SM</span>
-                          <div>
-                            <div class="fw-semibold">Sofia Marchetti</div>
-                            <div class="small text-body-secondary mono">RX-10295</div>
-                          </div>
-                        </div>
-                      </td>
-                      <td>Lisinopril 10 mg</td>
-                      <td>Dr. R. Singh</td>
-                      <td><span class="status-badge status-danger">Interaction</span></td>
-                      <td><span class="status-badge status-info">Verifying</span></td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="d-flex align-items-center gap-3">
-                          <span class="table-avatar">DK</span>
-                          <div>
-                            <div class="fw-semibold">Daniel Kim</div>
-                            <div class="small text-body-secondary mono">RX-10296</div>
-                          </div>
-                        </div>
-                      </td>
-                      <td>Salbutamol 100 mcg</td>
-                      <td>Dr. L. Hahn</td>
-                      <td><span class="text-body-secondary small">None</span></td>
-                      <td><span class="status-badge status-success">Ready</span></td>
-                    </tr>
-                  </tbody>
+                  <tbody data-dispense-queue></tbody>
                 </table>
               </div>
             </article>

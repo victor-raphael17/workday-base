@@ -29,7 +29,7 @@
           </div>
           <div class="d-flex flex-wrap gap-2">
             <button class="btn btn-outline-secondary btn-sm px-3" type="button">Export</button>
-            <button class="btn btn-success btn-sm px-3" type="button">Add patient</button>
+            <button class="btn btn-success btn-sm px-3" type="button" data-add-patient>Add patient</button>
           </div>
         </section>
 
@@ -54,23 +54,7 @@
                       <th scope="col">Last visit</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr data-patient-row data-name="Amara Okafor" data-id="PT-4821" data-dob="14 Mar 1989" data-phone="(555) 0142" data-plan="MedAid Plus" data-active="2" data-allergies="Penicillin" data-meds="Metformin 850 mg|Atorvastatin 20 mg">
-                      <td><div class="fw-semibold">Amara Okafor</div></td><td class="mono text-body-secondary">PT-4821</td><td class="mono text-body-secondary">14 Mar 1989</td><td>MedAid Plus</td><td class="text-end mono">2</td><td class="mono text-body-secondary">5 Jun 2026</td>
-                    </tr>
-                    <tr data-patient-row data-name="James Whitlock" data-id="PT-4822" data-dob="02 Sep 1972" data-phone="(555) 0188" data-plan="StateCare" data-active="1" data-allergies="" data-meds="Oxycodone 5 mg">
-                      <td><div class="fw-semibold">James Whitlock</div></td><td class="mono text-body-secondary">PT-4822</td><td class="mono text-body-secondary">02 Sep 1972</td><td>StateCare</td><td class="text-end mono">1</td><td class="mono text-body-secondary">5 Jun 2026</td>
-                    </tr>
-                    <tr data-patient-row data-name="Sofia Marchetti" data-id="PT-4823" data-dob="27 Jan 1995" data-phone="(555) 0211" data-plan="MedAid Plus" data-active="1" data-allergies="Sulfa drugs|Aspirin" data-meds="Lisinopril 10 mg">
-                      <td><div class="fw-semibold">Sofia Marchetti</div></td><td class="mono text-body-secondary">PT-4823</td><td class="mono text-body-secondary">27 Jan 1995</td><td>MedAid Plus</td><td class="text-end mono">1</td><td class="mono text-body-secondary">5 Jun 2026</td>
-                    </tr>
-                    <tr data-patient-row data-name="Daniel Kim" data-id="PT-4824" data-dob="19 Nov 1980" data-phone="(555) 0267" data-plan="Self-pay" data-active="1" data-allergies="" data-meds="Salbutamol 100 mcg">
-                      <td><div class="fw-semibold">Daniel Kim</div></td><td class="mono text-body-secondary">PT-4824</td><td class="mono text-body-secondary">19 Nov 1980</td><td>Self-pay</td><td class="text-end mono">1</td><td class="mono text-body-secondary">5 Jun 2026</td>
-                    </tr>
-                    <tr data-patient-row data-name="Grace Mensah" data-id="PT-4825" data-dob="08 Jul 1968" data-phone="(555) 0319" data-plan="StateCare" data-active="3" data-allergies="Codeine" data-meds="Metformin 850 mg|Amlodipine 5 mg|Omeprazole 20 mg">
-                      <td><div class="fw-semibold">Grace Mensah</div></td><td class="mono text-body-secondary">PT-4825</td><td class="mono text-body-secondary">08 Jul 1968</td><td>StateCare</td><td class="text-end mono">3</td><td class="mono text-body-secondary">4 Jun 2026</td>
-                    </tr>
-                  </tbody>
+                  <tbody data-patient-body></tbody>
                 </table>
               </div>
             </article>

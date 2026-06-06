@@ -28,7 +28,7 @@
             <p class="page-subtitle mb-0">Register 1. Cashier: Jade Okafor.</p>
           </div>
           <div class="d-flex flex-wrap gap-2">
-            <button class="btn btn-success btn-sm px-3" type="button">Take payment</button>
+            <button class="btn btn-success btn-sm px-3" type="button" data-take-payment disabled>Take payment</button>
           </div>
         </section>
 
@@ -40,38 +40,7 @@
               <kbd class="mono border rounded px-2 py-1 bg-body-tertiary">F2</kbd>
             </label>
 
-            <div class="product-grid">
-              <article class="product-card p-3" data-product data-name="Amoxicillin 500 mg" data-price="12.4" data-controlled="false">
-                <div class="d-flex justify-content-between gap-3 align-items-start mb-2"><div class="product-title">Amoxicillin</div><i data-lucide="pill"></i></div>
-                <div class="product-meta">500 mg · Capsule</div>
-                <div class="d-flex justify-content-between gap-2 align-items-center mt-3"><span class="product-price mono">$12.40</span><span class="product-meta mono">24 left</span></div>
-              </article>
-              <article class="product-card p-3" data-product data-name="Ibuprofen 200 mg" data-price="5.1" data-controlled="false">
-                <div class="d-flex justify-content-between gap-3 align-items-start mb-2"><div class="product-title">Ibuprofen</div><i data-lucide="pill"></i></div>
-                <div class="product-meta">200 mg · Tablet</div>
-                <div class="d-flex justify-content-between gap-2 align-items-center mt-3"><span class="product-price mono">$5.10</span><span class="product-meta mono">8 left</span></div>
-              </article>
-              <article class="product-card p-3" data-product data-name="Oxycodone 5 mg" data-price="28.9" data-controlled="true">
-                <div class="d-flex justify-content-between gap-3 align-items-start mb-2"><div class="product-title">Oxycodone</div><i data-lucide="shield-alert"></i></div>
-                <div class="product-meta">5 mg · Tablet</div>
-                <div class="d-flex justify-content-between gap-2 align-items-center mt-3"><span class="product-price mono">$28.90</span><span class="product-meta mono">14 left</span></div>
-              </article>
-              <article class="product-card p-3" data-product data-name="Paracetamol 500 mg" data-price="3.8" data-controlled="false">
-                <div class="d-flex justify-content-between gap-3 align-items-start mb-2"><div class="product-title">Paracetamol</div><i data-lucide="pill"></i></div>
-                <div class="product-meta">500 mg · Tablet</div>
-                <div class="d-flex justify-content-between gap-2 align-items-center mt-3"><span class="product-price mono">$3.80</span><span class="product-meta mono">142 left</span></div>
-              </article>
-              <article class="product-card p-3" data-product data-name="Omeprazole 20 mg" data-price="8.45" data-controlled="false">
-                <div class="d-flex justify-content-between gap-3 align-items-start mb-2"><div class="product-title">Omeprazole</div><i data-lucide="pill"></i></div>
-                <div class="product-meta">20 mg · Capsule</div>
-                <div class="d-flex justify-content-between gap-2 align-items-center mt-3"><span class="product-price mono">$8.45</span><span class="product-meta mono">33 left</span></div>
-              </article>
-              <article class="product-card p-3" data-product data-name="Diazepam 5 mg" data-price="19.6" data-controlled="true">
-                <div class="d-flex justify-content-between gap-3 align-items-start mb-2"><div class="product-title">Diazepam</div><i data-lucide="shield-alert"></i></div>
-                <div class="product-meta">5 mg · Tablet</div>
-                <div class="d-flex justify-content-between gap-2 align-items-center mt-3"><span class="product-price mono">$19.60</span><span class="product-meta mono">9 left</span></div>
-              </article>
-            </div>
+            <div class="product-grid" data-product-grid></div>
           </div>
 
           <div class="col-12 col-xl-5">
@@ -92,10 +61,18 @@
                     <p class="mono">Record this sale in the controlled substances register.</p>
                   </div>
                 </div>
+                <label class="modal-field mb-3">
+                  <span>Payment method</span>
+                  <select data-payment-method>
+                    <option value="card">Card</option>
+                    <option value="cash">Cash</option>
+                    <option value="insurance">Insurance</option>
+                  </select>
+                </label>
                 <div class="detail-list">
-                  <div class="detail-row"><span class="detail-row-label">Subtotal</span><span class="detail-row-value mono" data-pos="subtotal">$61.30</span></div>
-                  <div class="detail-row"><span class="detail-row-label">Tax (5%)</span><span class="detail-row-value mono" data-pos="tax">$3.07</span></div>
-                  <div class="detail-row"><span class="detail-row-label fw-semibold text-dark">Total</span><span class="detail-row-value mono fw-bold" data-pos="total">$64.37</span></div>
+                  <div class="detail-row"><span class="detail-row-label">Subtotal</span><span class="detail-row-value mono" data-pos="subtotal">$0.00</span></div>
+                  <div class="detail-row"><span class="detail-row-label">Tax (5%)</span><span class="detail-row-value mono" data-pos="tax">$0.00</span></div>
+                  <div class="detail-row"><span class="detail-row-label fw-semibold text-dark">Total</span><span class="detail-row-value mono fw-bold" data-pos="total">$0.00</span></div>
                 </div>
               </div>
             </article>
