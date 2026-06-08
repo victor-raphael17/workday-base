@@ -10,6 +10,10 @@
 >
 > Last updated: 2026-06-08 (added BUSINESS_RULES.md documenting extracted business rules).
 >
+> 🧭 New to the project? Start with **[PLAYBOOK.md](./PLAYBOOK.md)** — a hands-on onboarding
+> guide (client view + the path a click takes through the code) so a new dev can pick up
+> front and back tasks. This file (PROJECT_CONTEXT) is the reference; the playbook is the tour.
+>
 > 📋 Business rules live in **[BUSINESS_RULES.md](./BUSINESS_RULES.md)** — implemented rules
 > (auth, stock-status derivation, prescription/PO/sale state machines, oversell guards) plus
 > recommended-but-not-yet-built rules for a pharmacy. Update it whenever a business rule changes.
