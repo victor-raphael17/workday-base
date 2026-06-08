@@ -22,6 +22,56 @@ export class ApiError extends Error {
   }
 }
 
+// ---------------------------------------------------------------------------
+// Session / bearer-token storage
+// ---------------------------------------------------------------------------
+
+const SESSION_KEY = "ca_pharmacy_session";
+
+/**
+ * The signed-in session lives in localStorage ("Keep me signed in") or
+ * sessionStorage (this tab only). `auth` reads from whichever holds it and
+ * exposes the bearer token the API client attaches to every request.
+ */
+export const auth = {
+  get session() {
+    const raw =
+      window.localStorage.getItem(SESSION_KEY) || window.sessionStorage.getItem(SESSION_KEY);
+    if (!raw) {
+      return null;
+    }
+    try {
+      return JSON.parse(raw);
+    } catch {
+      return null;
+    }
+  },
+
+  get token() {
+    return this.session?.token || null;
+  },
+
+  get user() {
+    return this.session?.user || null;
+  },
+
+  save(session, remember = true) {
+    this.clear();
+    const store = remember ? window.localStorage : window.sessionStorage;
+    store.setItem(SESSION_KEY, JSON.stringify(session));
+  },
+
+  clear() {
+    window.localStorage.removeItem(SESSION_KEY);
+    window.sessionStorage.removeItem(SESSION_KEY);
+  },
+
+  /** Redirect to the sign-in page (relative to the current /pages/ file). */
+  redirectToLogin() {
+    window.location.replace("login.html");
+  },
+};
+
 async function request(path, { method = "GET", body, query } = {}) {
   let url = `${API_BASE}${path}`;
 
@@ -38,11 +88,20 @@ async function request(path, { method = "GET", body, query } = {}) {
     }
   }
 
+  const headers = {};
+  if (body) {
+    headers["Content-Type"] = "application/json";
+  }
+  const token = auth.token;
+  if (token) {
+    headers.Authorization = `Bearer ${token}`;
+  }
+
   let response;
   try {
     response = await fetch(url, {
       method,
-      headers: body ? { "Content-Type": "application/json" } : undefined,
+      headers: Object.keys(headers).length ? headers : undefined,
       body: body ? JSON.stringify(body) : undefined,
     });
   } catch (networkError) {
@@ -57,6 +116,12 @@ async function request(path, { method = "GET", body, query } = {}) {
 
   if (!response.ok) {
     const error = payload && payload.error ? payload.error : {};
+    // An expired/invalid session on any page but the login flow: clear and
+    // bounce to sign-in so the user isn't stuck on a broken screen.
+    if (response.status === 401 && path !== "/api/auth/login") {
+      auth.clear();
+      auth.redirectToLogin();
+    }
     throw new ApiError(response.status, error.message, error.fields || null);
   }
 
@@ -64,6 +129,11 @@ async function request(path, { method = "GET", body, query } = {}) {
 }
 
 export const api = {
+  login: (email, password) =>
+    request("/api/auth/login", { method: "POST", body: { email, password } }),
+  me: () => request("/api/auth/me"),
+  logout: () => request("/api/auth/logout", { method: "POST" }),
+
   dashboard: () => request("/api/dashboard"),
 
   medications: (query) => request("/api/medications", { query }),

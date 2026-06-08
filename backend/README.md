@@ -57,7 +57,12 @@ curl http://localhost:8080/api/dashboard
 ```
 
 Configuration is environment-driven (see `.env.example`): `DB_*`, `APP_DEBUG`,
-and `TAX_RATE` (sales tax fraction applied at point of sale, e.g. `0.08`).
+`TAX_RATE` (sales tax fraction applied at point of sale, e.g. `0.08`), and
+`AUTH_SESSION_TTL` (bearer-token lifetime in seconds, default `43200` = 12h).
+
+> Note: `schema.sql`/`seed.sql` only run when the DB volume is first created.
+> After changing them (e.g. the new `users`/`sessions` tables), recreate the
+> volume: `docker compose down -v && docker compose up -d --build`.
 
 ## Conventions
 
@@ -67,8 +72,23 @@ and `TAX_RATE` (sales tax fraction applied at point of sale, e.g. `0.08`).
   `422` for validation/business-rule failures, `404` not found, `405` wrong
   method.
 - All money/quantity fields are returned as numbers; dates as `YYYY-MM-DD`.
+- Authentication is bearer-token: sign in to receive a token, then send it as
+  `Authorization: Bearer <token>` on later requests. Auth failures return `401`.
 
 ## Endpoints
+
+### Authentication
+| Method | Path | Notes |
+|---|---|---|
+| POST | `/api/auth/login` | Body `{ "email", "password" }` → `{ token, expires_at, user }`. `401` on bad credentials, `422` on invalid input |
+| GET | `/api/auth/me` | Requires `Authorization: Bearer <token>` → the current `user`. `401` if missing/expired/revoked |
+| POST | `/api/auth/logout` | Revokes the bearer token (deletes its session). `204` |
+
+Passwords are stored as bcrypt hashes (`users` table). A session stores only the
+SHA-256 of the opaque token (`sessions` table), so the raw token never touches the
+database; tokens expire after `AUTH_SESSION_TTL` seconds (default 12h) and are
+revoked on logout. Seeded demo users (password `password123`):
+`jade@capharmacy.com` (pharmacist) and `admin@capharmacy.com` (admin).
 
 ### Dashboard
 | Method | Path | Notes |

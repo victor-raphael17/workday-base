@@ -1,6 +1,12 @@
 import { branch, navigation } from "./data.js";
-import { api } from "./api.js";
+import { api, auth, initials as toInitials } from "./api.js";
 import logoMark from "../images/logo-mark.svg";
+
+const ROLE_LABELS = {
+  pharmacist: "Pharmacist",
+  technician: "Technician",
+  admin: "Administrator",
+};
 
 export function renderShell(pageId) {
   const sidebar = document.getElementById("appSidebar");
@@ -10,12 +16,11 @@ export function renderShell(pageId) {
     return;
   }
 
-  const initials = branch.shiftLead
-    .split(" ")
-    .map((word) => word[0])
-    .join("")
-    .slice(0, 2)
-    .toUpperCase();
+  // Prefer the signed-in user; fall back to the static branch identity.
+  const user = auth.user;
+  const displayName = user?.name || branch.shiftLead;
+  const displayRole = user ? ROLE_LABELS[user.role] || user.role : branch.role;
+  const initials = toInitials(displayName);
 
   const main = document.querySelector("main.app-content");
   if (main && !document.querySelector(".skip-link")) {
@@ -46,8 +51,8 @@ export function renderShell(pageId) {
     <div class="sidebar-shift-card d-flex align-items-center gap-3">
       <span class="shift-avatar">${initials}</span>
       <div>
-        <div class="sidebar-shift-name">${branch.shiftLead}</div>
-        <div class="sidebar-shift-role">${branch.role} · ${branch.name}</div>
+        <div class="sidebar-shift-name">${displayName}</div>
+        <div class="sidebar-shift-role">${displayRole} · ${branch.name}</div>
       </div>
     </div>
   `;
@@ -71,6 +76,9 @@ export function renderShell(pageId) {
       </button>
       <button class="topbar-icon" type="button" aria-label="Help">
         <i data-lucide="help-circle"></i>
+      </button>
+      <button class="topbar-icon" id="logoutButton" type="button" aria-label="Sign out">
+        <i data-lucide="log-out"></i>
       </button>
     </div>
   `;
@@ -104,8 +112,20 @@ export function bindShellEvents() {
   const toggle = document.getElementById("mobileNavToggle");
   const scrim = document.getElementById("appScrim");
   const links = document.querySelectorAll(".sidebar-link");
+  const logout = document.getElementById("logoutButton");
 
   const closeNav = () => document.body.classList.remove("nav-open");
+
+  logout?.addEventListener("click", async () => {
+    logout.disabled = true;
+    try {
+      await api.logout();
+    } catch {
+      // Even if the network call fails, clear the local session below.
+    }
+    auth.clear();
+    auth.redirectToLogin();
+  });
 
   toggle?.addEventListener("click", () => {
     document.body.classList.toggle("nav-open");

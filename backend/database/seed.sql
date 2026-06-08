@@ -3,6 +3,13 @@
 
 BEGIN;
 
+-- Users (ids 1..2) -----------------------------------------------------------
+-- Demo password for every seeded user is "password123" (bcrypt-hashed below).
+-- Change these before any non-local deployment.
+INSERT INTO users (name, email, password_hash, role) VALUES
+    ('Jade Okafor', 'jade@capharmacy.com',  '$2y$12$zIxf9wmd7ystFv5UYHfcCOsPHzeVYgRvuNOaaraRw0EKkLAu7xE/G', 'pharmacist'),
+    ('Site Admin',  'admin@capharmacy.com', '$2y$12$0nQr65a6tKu4639ypqNgcOIYJIaejYalECmh2CNc8Ih2Pn48dfN1a', 'admin');
+
 -- Suppliers (ids 1..3 on a fresh sequence) -----------------------------------
 INSERT INTO suppliers (name, contact_email, phone) VALUES
     ('MedSource Distribution', 'orders@medsource.example', '(555) 0700'),

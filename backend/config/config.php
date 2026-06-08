@@ -20,6 +20,11 @@ return [
         'tax_rate' => (float) Env::get('TAX_RATE', '0'),
     ],
 
+    'auth' => [
+        // How long a sign-in session (bearer token) stays valid, in seconds.
+        'session_ttl' => (int) Env::get('AUTH_SESSION_TTL', (string) (12 * 60 * 60)),
+    ],
+
     'db' => [
         'host'     => Env::get('DB_HOST', 'db'),
         'port'     => Env::get('DB_PORT', '5432'),

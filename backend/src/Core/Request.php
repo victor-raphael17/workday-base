@@ -21,13 +21,15 @@ final class Request
     private ?array $body = null;
 
     /**
-     * @param array<string, mixed> $query
+     * @param array<string, mixed>  $query
+     * @param array<string, string> $headers Header name (lower-cased) => value.
      */
     public function __construct(
         public readonly string $method,
         public readonly string $path,
         public readonly array $query,
         private readonly string $rawBody,
+        public readonly array $headers = [],
     ) {
     }
 
@@ -39,7 +41,48 @@ final class Request
         $path = parse_url($uri, PHP_URL_PATH) ?: '/';
         $path = '/' . trim(rawurldecode($path), '/');
 
-        return new self($method, $path, $_GET, file_get_contents('php://input') ?: '');
+        return new self($method, $path, $_GET, file_get_contents('php://input') ?: '', self::captureHeaders());
+    }
+
+    /**
+     * Build a lower-cased header map from $_SERVER (works on any SAPI).
+     *
+     * @return array<string, string>
+     */
+    private static function captureHeaders(): array
+    {
+        $headers = [];
+
+        foreach ($_SERVER as $key => $value) {
+            if (str_starts_with((string) $key, 'HTTP_')) {
+                $name = strtolower(str_replace('_', '-', substr((string) $key, 5)));
+                $headers[$name] = (string) $value;
+            }
+        }
+
+        // Some SAPIs surface Authorization outside the HTTP_ prefix.
+        if (!isset($headers['authorization']) && isset($_SERVER['REDIRECT_HTTP_AUTHORIZATION'])) {
+            $headers['authorization'] = (string) $_SERVER['REDIRECT_HTTP_AUTHORIZATION'];
+        }
+
+        return $headers;
+    }
+
+    public function header(string $name, ?string $default = null): ?string
+    {
+        return $this->headers[strtolower($name)] ?? $default;
+    }
+
+    /** Extract the token from an `Authorization: Bearer <token>` header. */
+    public function bearerToken(): ?string
+    {
+        $header = $this->header('authorization', '') ?? '';
+
+        if (preg_match('/^Bearer\s+(.+)$/i', trim($header), $m) === 1) {
+            return trim($m[1]);
+        }
+
+        return null;
     }
 
     /**

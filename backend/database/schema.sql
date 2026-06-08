@@ -15,6 +15,39 @@ END;
 $$ LANGUAGE plpgsql;
 
 -- ---------------------------------------------------------------------------
+-- Users (staff who sign in to the console) + sessions (bearer tokens)
+-- Passwords are stored as bcrypt hashes (password_hash); sessions hold the
+-- SHA-256 of an opaque bearer token, never the token itself.
+-- ---------------------------------------------------------------------------
+CREATE TABLE users (
+    id            SERIAL PRIMARY KEY,
+    name          VARCHAR(160) NOT NULL,
+    email         VARCHAR(160) NOT NULL UNIQUE,
+    password_hash VARCHAR(255) NOT NULL,
+    role          VARCHAR(20) NOT NULL DEFAULT 'pharmacist'
+                  CHECK (role IN ('pharmacist', 'technician', 'admin')),
+    created_at    TIMESTAMPTZ NOT NULL DEFAULT now(),
+    updated_at    TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+CREATE INDEX users_email_idx ON users (lower(email));
+
+CREATE TRIGGER users_updated_at
+    BEFORE UPDATE ON users
+    FOR EACH ROW EXECUTE FUNCTION set_updated_at();
+
+CREATE TABLE sessions (
+    id         SERIAL PRIMARY KEY,
+    user_id    INTEGER NOT NULL REFERENCES users (id) ON DELETE CASCADE,
+    token_hash VARCHAR(64) NOT NULL UNIQUE,
+    expires_at TIMESTAMPTZ NOT NULL,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+CREATE INDEX sessions_token_idx ON sessions (token_hash);
+CREATE INDEX sessions_user_idx ON sessions (user_id);
+
+-- ---------------------------------------------------------------------------
 -- Suppliers (who we buy stock from)
 -- ---------------------------------------------------------------------------
 CREATE TABLE suppliers (

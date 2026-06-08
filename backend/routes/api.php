@@ -10,6 +10,7 @@
 
 declare(strict_types=1);
 
+use App\Controllers\AuthController;
 use App\Controllers\DashboardController;
 use App\Controllers\HealthController;
 use App\Controllers\MedicationController;
@@ -24,6 +25,11 @@ return static function (Router $r): void {
     // Service info + health -------------------------------------------------
     $r->get('/', [HealthController::class, 'index']);
     $r->get('/health', [HealthController::class, 'health']);
+
+    // Authentication --------------------------------------------------------
+    $r->post('/api/auth/login', [AuthController::class, 'login']);
+    $r->get('/api/auth/me', [AuthController::class, 'me']);
+    $r->post('/api/auth/logout', [AuthController::class, 'logout']);
 
     // Dashboard -------------------------------------------------------------
     $r->get('/api/dashboard', [DashboardController::class, 'summary']);

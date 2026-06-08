@@ -44,6 +44,25 @@ status_code() {
 echo "== Health =="
 assert_eq "GET /health is healthy" "healthy" "$(curl -s "$API/health" | jq -r '.status')"
 
+echo "== Authentication: login, me, logout =="
+# Wrong password is rejected (401).
+assert_eq "bad credentials return 401" "401" \
+  "$(status_code POST /api/auth/login '{"email":"jade@capharmacy.com","password":"nope"}')"
+# Valid sign-in issues a bearer token.
+TOKEN=$(curl -s -X POST "$API/api/auth/login" -H 'Content-Type: application/json' \
+  -d '{"email":"jade@capharmacy.com","password":"password123"}' | jq -r '.data.token')
+assert_eq "login issues a token" "true" "$([[ -n "$TOKEN" && "$TOKEN" != "null" ]] && echo true || echo false)"
+# The token identifies the current user.
+assert_eq "GET /me returns the user" "jade@capharmacy.com" \
+  "$(curl -s "$API/api/auth/me" -H "Authorization: Bearer $TOKEN" | jq -r '.data.email')"
+# A missing token is unauthorized.
+assert_eq "GET /me without token is 401" "401" \
+  "$(curl -s -o /dev/null -w '%{http_code}' "$API/api/auth/me")"
+# Logout revokes the token.
+curl -s -o /dev/null -X POST "$API/api/auth/logout" -H "Authorization: Bearer $TOKEN"
+assert_eq "token is revoked after logout" "401" \
+  "$(curl -s -o /dev/null -w '%{http_code}' "$API/api/auth/me" -H "Authorization: Bearer $TOKEN")"
+
 # Pick a well-stocked, non-controlled medication (Paracetamol in the seed).
 MED_ID=$(curl -s "$API/api/medications" \
   | jq -r '[.data[] | select(.controlled==false and .on_hand>20 and .status=="in")][0].id')
